@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.DateTimeException;
 import java.util.Date;
 import java.util.List;
 
@@ -19,12 +19,14 @@ public class Project {
     private String name;
     private Date startsOn;
     @ElementCollection
-    private List<Employee> resources;
+    @OneToMany(mappedBy = "employee")
+    private List<Employee> employees;
+
 
     public Project(String name, Date startsOn, List<Employee> resources) {
         this.name = name;
         this.startsOn = startsOn;
-        this.resources = resources;
+        this.employees = resources;
     }
 
     public void setId(int id) {
@@ -40,7 +42,7 @@ public class Project {
     }
 
     public void setResources(List<Employee> resources) {
-        this.resources = resources;
+        this.employees = resources;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class Project {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", startsOn=" + startsOn +
-                ", resources=" + resources +
+                ", resources=" + employees +
                 '}';
     }
 }

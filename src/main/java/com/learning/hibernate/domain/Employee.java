@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,10 @@ public class Employee {
     private String name;
     private String designation;
     private Double salary;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public Employee() {
     }
@@ -39,6 +45,10 @@ public class Employee {
 
     public Double getSalary() {
         return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 
     @Override
